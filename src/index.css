@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mhfd-dark-blue: #06242D;
+  --color-mhfd-purple: #80A7F7;
+  --color-mhfd-blue: #62b4cc;
+  --color-medium-green: #29C499;
+  --color-medium-taupe: #A29F8B;
+  --color-soft-purple: #191533;
+  --color-soft-blue: #66D4FF;
+  --color-soft-teal: #66E0D5;
+  --color-bright-yellow: #FFDD00;
+  --color-deep-purple: #251863;
+  --color-deep-blue: #0079A8;
+  --color-deep-green: #1C8281;
+  --color-deep-taupe: #787263;
+  --color-mhfd-gradient: linear-gradient(90deg, #80A7F7, #62b4cc);
+}
