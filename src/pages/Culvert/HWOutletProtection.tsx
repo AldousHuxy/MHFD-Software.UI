@@ -46,30 +46,26 @@ const HWOutletProtection = () => {
             return { type: 'pipe' };
         }
 
-        const baseValues = {
-            type: selectedCulvert.type,
-        };
-
         if (!selectedCulvert.hwOutletProtection) {
-            return baseValues;
+            return { type: selectedCulvert.type };
         }
 
         if (selectedCulvert.type === 'pipe') {
             return {
-                ...baseValues,
+                type: 'pipe',
                 designDischarge: selectedCulvert.hwOutletProtection.designDischarge,
                 barrelDiameter: selectedCulvert.hwOutletProtection.barrelDiameter,
-                inletEdgeType: selectedCulvert.hwOutletProtection.inletEdgeType,
+                inletEdgeType: selectedCulvert.hwOutletProtection.inletEdgeType as PipeInletEdgeType,
             };
         } else {
             return {
-                ...baseValues,
+                type: 'box',
                 designDischarge: selectedCulvert.hwOutletProtection.designDischarge,
                 tailwaterSurfaceElevation: selectedCulvert.hwOutletProtection.tailwaterSurfaceElevation,
                 maxAllowableChannelVelocity: selectedCulvert.hwOutletProtection.maxAllowableChannelVelocity,
                 barrelHeight: selectedCulvert.hwOutletProtection.barrelHeight,
                 barrelWidth: selectedCulvert.hwOutletProtection.barrelWidth,
-                inletEdgeType: selectedCulvert.hwOutletProtection.inletEdgeType,
+                inletEdgeType: selectedCulvert.hwOutletProtection.inletEdgeType as BoxInletEdgeType,
                 numOfBarrels: selectedCulvert.hwOutletProtection.numOfBarrels,
                 inletElevationAtCulvertInlet: selectedCulvert.hwOutletProtection.inletElevationAtCulvertInlet,
                 isSlope: selectedCulvert.hwOutletProtection.isSlope,

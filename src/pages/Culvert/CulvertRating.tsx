@@ -54,14 +54,14 @@ const CulvertRating = () => {
             return {
                 type: 'pipe' as const,
                 barrelDiameter: selectedCulvert.culvertRating.barrelDiameter,
-                inletEdgeType: selectedCulvert.culvertRating.inletEdgeType,
+                inletEdgeType: selectedCulvert.culvertRating.inletEdgeType as PipeInletEdgeType,
             };
         } else {
             return {
                 type: 'box' as const,
                 barrelHeight: selectedCulvert.culvertRating.barrelHeight,
                 barrelWidth: selectedCulvert.culvertRating.barrelWidth,
-                inletEdgeType: selectedCulvert.culvertRating.inletEdgeType,
+                inletEdgeType: selectedCulvert.culvertRating.inletEdgeType as BoxInletEdgeType,
                 numOfBarrels: selectedCulvert.culvertRating.numOfBarrels,
                 inletElevationAtCulvertInlet: selectedCulvert.culvertRating.inletElevationAtCulvertInlet,
                 isSlope: selectedCulvert.culvertRating.isSlope,
