@@ -1,11 +1,11 @@
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 import type { Message } from '@/types/conversation';
 import ReactMarkdown from 'react-markdown';
 
 type ChatMessageBoxProps = {} & Message;
 
 export const ChatMessage = ({ role, content }: ChatMessageBoxProps) => {
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
     
     if (role === 'user') {
         return (

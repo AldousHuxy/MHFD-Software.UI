@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 import { ChatMessage } from './ChatMessage';
 import type { Message } from '@/types/conversation';
 
@@ -9,7 +9,7 @@ type ChatDisplayProps = {
 };
 
 export const ChatDisplay = ({ messages, isPending }: ChatDisplayProps) => {
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

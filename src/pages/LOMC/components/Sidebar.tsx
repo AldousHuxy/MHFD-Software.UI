@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { FileBrowser } from './FileBrowser';
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 
 type SidebarProps = {
   isOpen: boolean;
 };
 
 export const Sidebar = ({ isOpen }: SidebarProps) => {
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useTheme();
   const [selectedFile, setSelectedFile] = useState<string | string[] | null>(null);
   const [parentDir, setParentDir] = useState<string>('24-08-0233R Lemon Gulch Reach 1');
   const [isRunning, setIsRunning] = useState(false);

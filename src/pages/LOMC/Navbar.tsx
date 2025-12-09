@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 import { useAgent } from '@/context/AgentContext';
 import PATHS from '@/routes';
 
@@ -10,7 +10,7 @@ type NavbarProps = {
 };
 
 export const Navbar = ({ open, setOpen }: NavbarProps) => {
-  const { isDarkTheme, toggleDarkTheme } = useThemeContext();
+  const { isDarkTheme, toggleDarkTheme } = useTheme();
   const { pathname } = useLocation();
   const isSettingsPage = pathname === PATHS.LOMC.SETTINGS;
   const { agents, selectedAgent, changeSelectedAgent } = useAgent();

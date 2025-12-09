@@ -1,4 +1,4 @@
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 import { mockFileStructure } from '@/mocks/fileStructures';
 import type { FileNode } from '@/types/fileNode';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ type FileBrowserProps = {
 };
 
 export const FileBrowser = ({ onFileSelect }: FileBrowserProps) => {
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useTheme();
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set([mockFileStructure[0].path]));
   const [selectedPaths, setSelectedPaths] = useState<Set<string>>(new Set());
 

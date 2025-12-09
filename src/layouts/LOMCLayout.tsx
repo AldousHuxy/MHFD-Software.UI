@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '@/pages/LOMC/components/Sidebar';
 import { Navbar } from '@/pages/LOMC/Navbar';
-import { ThemeProvider, useThemeContext } from '@/context/ThemeContext';
+import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 import { AgentProvider } from '@/context/AgentContext';
 
 const LOMCLayout = () => {
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (

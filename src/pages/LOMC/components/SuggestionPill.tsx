@@ -1,4 +1,4 @@
-import { useThemeContext } from "@/context/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 import type { Pill } from "@/types/pill";
 
 type SuggestionPillsProps = {
@@ -7,7 +7,7 @@ type SuggestionPillsProps = {
 };
 
 export const SuggestionPill = ({ pill, handlePillClick }: SuggestionPillsProps) => {
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
 
     return (
         <button

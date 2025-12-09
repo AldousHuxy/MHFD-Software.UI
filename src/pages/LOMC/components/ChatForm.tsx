@@ -2,7 +2,7 @@ import type { Message } from '@/types/conversation';
 import type { Pill } from '@/types/pill';
 import { useChatForm } from '../hooks/useChatForm';
 import { SuggestionPill } from './SuggestionPill';
-import { useThemeContext } from '@/context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 
 const pills = [
   { id: 0, label: 'Test', text: 'Who am I?', color: 'grey' },
@@ -36,7 +36,7 @@ export const ChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
     handleFileChange,
     handleAttachmentClick,
   } = useChatForm({ onSendMessage, isPending });
-  const { isDarkTheme } = useThemeContext();
+  const { isDarkTheme } = useTheme();
 
   return (
     <div className={`rounded-2xl shadow-lg border transition-all ${
