@@ -4,6 +4,7 @@ import PATHS from '@/routes';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { FaSearch } from "react-icons/fa";
 import { When } from '@/hocs/When';
+import floodwareLogo from '/floodware-logo_light.png';
 
 type SearchForm = {
   search: string
@@ -21,7 +22,7 @@ export const Header = () => {
     <header className="cursor-pointer bg-mhfd-dark-blue text-white p-3 sm:p-4 flex items-center justify-between gap-2 sm:gap-4">
         <div className="flex items-center gap-3 sm:gap-4">
           <img src={mhfdLogo} alt="MHFD Logo" className="h-8 sm:h-10 md:h-12 shrink-0" onClick={() => navigate(PATHS.HOME)} />
-          <h1 className="text-xl sm:text-2xl font-bold">Floodware</h1>
+          <img src={floodwareLogo} alt="Floodware Logo" className="h-2 sm:h-4 md:h-6 shrink-0" onClick={() => navigate(PATHS.HOME)} />
         </div>
         <div className="flex items-center gap-4 sm:gap-6 w-full max-w-2xl justify-end">
           <When condition={!isActivePage(PATHS.CULVERT.HOME)}>
