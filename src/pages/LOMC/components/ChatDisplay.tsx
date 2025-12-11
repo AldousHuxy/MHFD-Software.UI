@@ -21,7 +21,7 @@ export const ChatDisplay = ({ messages, isPending }: ChatDisplayProps) => {
   return (
     <div 
       ref={scrollRef}
-      className={`flex flex-col gap-3 sm:gap-4 w-full p-4 sm:p-6 rounded-2xl shadow-lg border xl:h-[380px] 2xl:h-[860px] overflow-y-auto scrollbar-smooth transition-colors duration-300 ${
+      className={`flex flex-col gap-3 sm:gap-4 w-full p-4 sm:p-6 rounded-2xl shadow-lg border xl:h-[380px] 2xl:h-[500px] overflow-y-auto scrollbar-smooth transition-colors duration-300 ${
         isDarkTheme 
           ? 'bg-gray-800 border-gray-700' 
           : 'bg-white border-gray-100'
