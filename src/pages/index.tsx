@@ -31,9 +31,9 @@ const Home = () => {
       id: 1,
       module: { name: <>Hydraulics & Hydrology Tools</>, label: 'Hydraulics & Hydrology Tools', route: '/hydraulics-hydrology' },
       submodules: [
-        { name: <>CUHP <sup className="text-medium-green">v3</sup></>, label: 'CUHP', route: '/cuhp' },
-        { name: <>UDSWMM <sup className="text-medium-green">v2</sup></>, label: 'UDSWMM', route: '/udswwm' },
-        { name: <>UD-Sewer <sup className="text-medium-green">v2</sup></>, label: 'UD-Sewer', route: '/ud-sewer' }
+        { name: <>Colorado Urban Hydrograph Procedure <sup className="text-medium-green">v3</sup></>, label: 'CUHP', route: '/cuhp' },
+        { name: <>Urban Drainage Storm Water Management Model <sup className="text-medium-green">v2</sup></>, label: 'UDSWMM', route: '/udswwm' },
+        { name: <>Urban Drainage Sewer <sup className="text-medium-green">v2</sup></>, label: 'UD-Sewer', route: '/ud-sewer' }
       ]
     },
     {
@@ -60,14 +60,14 @@ const Home = () => {
       module: { name: <>Planning & Construction Tools</>, label: 'Planning & Construction Tools', route: '/planning-construction' },
       submodules: [
         { name: <>Bid Item Pricing</>, label: 'Bid Item Pricing', route: '/bid-item-pricing' },
-        { name: <>UD-MP Cost <sup className="text-medium-green">v3</sup></>, label: 'UD-MP Cost', route: '/ud-mp-cost' }
+        { name: <>Urban Drainage Master Plan Cost <sup className="text-medium-green">v3</sup></>, label: 'UD-MP Cost', route: '/ud-mp-cost' }
       ]
     },
     {
       id: 5,
       module: { name: <>Floodplain Management Tools</>, label: 'Floodplain Management Tools', route: '/floodplain-management' },
       submodules: [
-        { name: <>LOMC Chatbot</>, label: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
+        { name: <>Letter of Map Change Analysis</>, label: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
       ]
     },
   ]
