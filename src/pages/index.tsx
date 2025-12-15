@@ -6,10 +6,70 @@ import kenneysRun from '/stream-Kenneys_Run.jpg';
 import bearCreek from '/stream-Bear_Creek.jpg';
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import { When } from '@/hocs/When';
+import { IoIosClose } from "react-icons/io";
+import ROUTES from '@/routes'
+import { useNavigate } from 'react-router-dom';
+
+type Tool = {
+  id: number
+  module: {  name: string, route: string  }
+  submodules: { name: string, route: string }[]
+}
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<string>('');
   const searchRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  
+  const toolsDropdown: Tool[] = [
+    {
+      id: 1,
+      module: { name: 'Hydraulics & Hydrology Tools', route: '/hydraulics-hydrology' },
+      submodules: [
+        { name: 'CUHP 3.0.0', route: '/cuhp' },
+        { name: 'UDSWMM 2.0.0', route: '/udswwm' },
+        { name: 'UD-Sewer', route: '/ud-sewer' }
+      ]
+    },
+    {
+      id: 2,
+      module: { name: 'Design Tools [USDCM] Vol.1 & 2', route: '/design-tools-vol1-2' },
+      submodules: [
+        { name: 'Rational', route: '/rational' },
+        { name: 'Inlet', route: '/inlet' },
+        { name: 'Detention', route: '/detention' },
+        { name: 'Culvert', route: ROUTES.CULVERT.HOME }
+      ]
+    },
+    {
+      id: 3,
+      module: { name: 'Design Tools [USDCM] Vol.3', route: '/design-tools-vol3' },
+      submodules: [
+        { name: 'Preliminary', route: '/preliminary' },
+        { name: 'Detailed', route: '/detailed' }
+      ]
+    },
+    {
+      id: 4,
+      module: { name: 'Planning & Construction Tools', route: '/planning-construction' },
+      submodules: [
+        { name: 'Bid Item Pricing', route: '/bid-item-pricing' },
+        { name: 'UD-MP Cost', route: '/ud-mp-cost' }
+      ]
+    },
+    {
+      id: 5,
+      module: { name: 'Floodplain Management Tools', route: '/floodplain-management' },
+      submodules: [
+        { name: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
+      ]
+    },
+  ]
 
   const formatAltText = (filename: string) => {
     const parts = filename.split('/');
@@ -40,7 +100,58 @@ const Home = () => {
 
   const search: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    console.log(searchRef.current?.value);
+    if (selectedItem) {
+      const selectedTool = toolsDropdown.find(tool => 
+        tool.module.name === selectedItem || 
+        tool.submodules.some(sub => sub.name === selectedItem)
+      );
+      if (selectedTool) {
+        const submodule = selectedTool.submodules.find(sub => sub.name === selectedItem);
+        const route = submodule ? submodule.route : selectedTool.module.route;
+        navigate(route);
+      }
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setSelectedItem('');
+  };
+
+  const handleInputFocus = () => {
+    setShowDropdown(true);
+  };
+
+  const handleSelectItem = (item: string) => {
+    setSelectedItem(item);
+    setSearchQuery(item);
+    setShowDropdown(false);
+    searchRef.current?.blur();
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setSelectedItem('');
+    setShowDropdown(false);
+    searchRef.current?.focus();
+  };
+
+  const getFilteredTools = () => {
+    if (!searchQuery.trim()) {
+      return toolsDropdown;
+    }
+
+    const query = searchQuery.toLowerCase();
+    return toolsDropdown.map(tool => ({
+      ...tool,
+      submodules: tool.submodules.filter(sub => 
+        sub.name.toLowerCase().includes(query) || 
+        tool.module.name.toLowerCase().includes(query)
+      )
+    })).filter(tool => 
+      tool.module.name.toLowerCase().includes(query) || 
+      tool.submodules.length > 0
+    );
   };
 
   useEffect(() => {
@@ -50,13 +161,28 @@ const Home = () => {
     return () => clearInterval(id);
   }, [carouselImages.length]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(event.target as Node) &&
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className="relative">
       <div className="relative overflow-hidden w-full h-[88vh]">
         <div className="absolute inset-0 flex items-center justify-center">
           <img src={carouselImages[currentImageIndex].src} alt={carouselImages[currentImageIndex].alt} className="w-full h-full object-cover opacity-65" />
-          {/* Search bar container */}
-          <p className="absolute top-3 left-[36%] flex flex-col">
+          <div className="absolute top-3 left-[36%] flex flex-col">
             <span className="inline-flex items-center rounded-full shadow-2xl drop-shadow-2xl overflow-hidden">
               <button
                 type="button"
@@ -65,17 +191,68 @@ const Home = () => {
               >
                 Search
               </button>
-              <div className="bg-mhfd-dark-blue bg-opacity-75 text-white rounded-r-full">
+              <div className="bg-mhfd-dark-blue bg-opacity-75 text-white rounded-r-full relative">
                 <input
                   type="text"
                   ref={searchRef}
-                  placeholder="Find Floodware..."
+                  value={searchQuery}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  placeholder="Search Floodware..."
                   aria-label="Search"
-                  className="bg-white w-[420px] h-12 bg-opacity-20 placeholder-black placeholder-opacity-60 text-black text-lg px-4 rounded-r-full focus:ring-2 focus:ring-mhfd-dark-blue focus:outline-none"
+                  className="bg-white w-[420px] h-12 bg-opacity-20 placeholder-black placeholder-opacity-60 text-gray-500 text-lg px-4 pr-12 rounded-r-full focus:ring-2 focus:ring-mhfd-dark-blue focus:outline-none"
                 />
+                <When condition={searchQuery.length > 0}>
+                  <button
+                    type="button"
+                    onClick={handleClearSearch}
+                    aria-label="Clear search"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-mhfd-dark-blue hover:scale-110 transition-all duration-150 cursor-pointer"
+                  >
+                    <IoIosClose className="h-7 w-7" />
+                  </button>
+                </When>
               </div>
             </span>
-          </p>
+
+            {/* Dropdown */}
+            <When condition={showDropdown}>
+              <div 
+                ref={dropdownRef}
+                className="absolute top-14 left-0 right-0 bg-white rounded-l-2xl shadow-2xl max-h-96 overflow-y-auto z-50 border border-gray-200 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-mhfd-dark-blue [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-medium-green"
+              >
+                {getFilteredTools().length > 0 ? (
+                  getFilteredTools().map((tool) => (
+                    <div key={tool.id} className="border-b border-gray-100 last:border-b-0">
+                      <div 
+                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer font-semibold text-mhfd-dark-blue"
+                        onClick={() => handleSelectItem(tool.module.name)}
+                      >
+                        {tool.module.name}
+                      </div>
+                      {tool.submodules.length > 0 && (
+                        <div className="bg-gray-50">
+                          {tool.submodules.map((submodule, idx) => (
+                            <div
+                              key={idx}
+                              className="px-8 py-2 hover:bg-gray-100 cursor-pointer text-gray-700 border-t border-gray-200"
+                              onClick={() => handleSelectItem(submodule.name)}
+                            >
+                              {submodule.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div className="px-4 py-3 text-gray-500 text-center">
+                    No tools found
+                  </div>
+                )}
+              </div>
+            </When>
+          </div>
         </div>
 
         <button
