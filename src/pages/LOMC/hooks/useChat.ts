@@ -13,7 +13,7 @@ export const useChat = () => {
         
         const currentMessages = useMessages.getState().msgs;
         
-        converse({
+        await converse({
             model: selectedAgent.model,
             messages: currentMessages,
             store: true
