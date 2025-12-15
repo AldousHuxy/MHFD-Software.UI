@@ -6,38 +6,10 @@ import kenneysRun from '/stream-Kenneys_Run.jpg';
 import bearCreek from '/stream-Bear_Creek.jpg';
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
-import { When } from '@/hocs/When';
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const searchRef = useRef<HTMLInputElement>(null);
-  const toolsDropdown = [
-    {
-      id: 1,
-      module: 'Hydraulics & Hydrology Tools',
-      submodules: ['CUHP', 'UDSWMM', 'UD-Sewer']
-    },
-    {
-      id: 2,
-      module: 'Design Tools [USDCM] Vol.1 & 2',
-      submodules: ['Rational', 'Inlet', 'Detention', 'Culvert']
-    },
-    {
-      id: 3,
-      module: 'Design Tools [USDCM] Vol.3',
-      submodules: ['Preliminary', 'Detailed']
-    },
-    {
-      id: 4,
-      module: 'Planning & Construction Tools',
-      submodules: ['Bid Item Pricing', 'UD-MP Cost']
-    },
-    {
-      id: 5,
-      module: 'Floodplain Management Tools',
-      submodules: ['AI Chatbot']
-    },
-  ]
 
   const formatAltText = (filename: string) => {
     const parts = filename.split('/');
