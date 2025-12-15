@@ -1,4 +1,4 @@
-import { useState, useEffect, type MouseEventHandler, useRef } from 'react';
+import { useState, useEffect, type MouseEventHandler, useRef, type ReactNode } from 'react';
 import boulderCreek from '/stream-Boulder_Creek.jpg';
 import cherryCreek from '/stream-Cherry_Creek.jpg';
 import sandersonGulch from '/stream-Sanderson_Gulch.jpg';
@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom';
 
 type Tool = {
   id: number
-  module: {  name: string, route: string  }
-  submodules: { name: string, route: string }[]
+  module: {  name: ReactNode, label: string, route: string  }
+  submodules: { name: ReactNode, label: string, route: string }[]
 }
 
 const Home = () => {
@@ -29,44 +29,45 @@ const Home = () => {
   const toolsDropdown: Tool[] = [
     {
       id: 1,
-      module: { name: 'Hydraulics & Hydrology Tools', route: '/hydraulics-hydrology' },
+      module: { name: <>Hydraulics & Hydrology Tools</>, label: 'Hydraulics & Hydrology Tools', route: '/hydraulics-hydrology' },
       submodules: [
-        { name: 'CUHP 3.0.0', route: '/cuhp' },
-        { name: 'UDSWMM 2.0.0', route: '/udswwm' },
-        { name: 'UD-Sewer', route: '/ud-sewer' }
+        { name: <>CUHP <sup className="text-medium-green">v3</sup></>, label: 'CUHP', route: '/cuhp' },
+        { name: <>UDSWMM <sup className="text-medium-green">v2</sup></>, label: 'UDSWMM', route: '/udswwm' },
+        { name: <>UD-Sewer <sup className="text-medium-green">v2</sup></>, label: 'UD-Sewer', route: '/ud-sewer' }
       ]
     },
     {
       id: 2,
-      module: { name: 'Design Tools [USDCM] Vol.1 & 2', route: '/design-tools-vol1-2' },
+      module: { name: <>Design Tools [USDCM] Vol.1 & 2</>, label: 'Design Tools [USDCM] Vol.1 & 2', route: '/design-tools-vol1-2' },
       submodules: [
-        { name: 'Rational', route: '/rational' },
-        { name: 'Inlet', route: '/inlet' },
-        { name: 'Detention', route: '/detention' },
-        { name: 'Culvert', route: ROUTES.CULVERT.HOME }
+        { name: <>Peak Runoff Prediction by the Rational Method</>, label: 'Rational', route: '/rational' },
+        { name: <>Street Capacity and Inlet Sizing</>, label: 'Inlet', route: '/inlet' },
+        { name: <>Detention Design <sup className="text-medium-green">v5</sup></>, label: 'Detention', route: '/detention' },
+        { name: <>Culvert Hydraulics <sup className="text-medium-green">v3</sup></>, label: 'Culvert', route: ROUTES.CULVERT.HOME }
       ]
     },
     {
       id: 3,
-      module: { name: 'Design Tools [USDCM] Vol.3', route: '/design-tools-vol3' },
+      module: { name: <>Design Tools [USDCM] Vol.3</>, label: 'Design Tools [USDCM] Vol.3', route: '/design-tools-vol3' },
       submodules: [
-        { name: 'Preliminary', route: '/preliminary' },
-        { name: 'Detailed', route: '/detailed' }
+        { name: <>Bioretention Media Mix Analysis</>, label: 'Bioretention', route: '/bioretention' },
+        { name: <>Stormwater Control Measure Design <sup className="text-medium-green">v5</sup></>, label: 'SMC', route: '/smc' },
+        { name: <>BMP Life Cycle Cost Analysis</>, label: 'BMP', route: '/bmp' }
       ]
     },
     {
       id: 4,
-      module: { name: 'Planning & Construction Tools', route: '/planning-construction' },
+      module: { name: <>Planning & Construction Tools</>, label: 'Planning & Construction Tools', route: '/planning-construction' },
       submodules: [
-        { name: 'Bid Item Pricing', route: '/bid-item-pricing' },
-        { name: 'UD-MP Cost', route: '/ud-mp-cost' }
+        { name: <>Bid Item Pricing</>, label: 'Bid Item Pricing', route: '/bid-item-pricing' },
+        { name: <>UD-MP Cost <sup className="text-medium-green">v3</sup></>, label: 'UD-MP Cost', route: '/ud-mp-cost' }
       ]
     },
     {
       id: 5,
-      module: { name: 'Floodplain Management Tools', route: '/floodplain-management' },
+      module: { name: <>Floodplain Management Tools</>, label: 'Floodplain Management Tools', route: '/floodplain-management' },
       submodules: [
-        { name: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
+        { name: <>LOMC Chatbot</>, label: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
       ]
     },
   ]
@@ -102,11 +103,11 @@ const Home = () => {
     e.preventDefault();
     if (selectedItem) {
       const selectedTool = toolsDropdown.find(tool => 
-        tool.module.name === selectedItem || 
-        tool.submodules.some(sub => sub.name === selectedItem)
+        tool.module.label === selectedItem || 
+        tool.submodules.some(sub => sub.label === selectedItem)
       );
       if (selectedTool) {
-        const submodule = selectedTool.submodules.find(sub => sub.name === selectedItem);
+        const submodule = selectedTool.submodules.find(sub => sub.label === selectedItem);
         const route = submodule ? submodule.route : selectedTool.module.route;
         navigate(route);
       }
@@ -145,11 +146,11 @@ const Home = () => {
     return toolsDropdown.map(tool => ({
       ...tool,
       submodules: tool.submodules.filter(sub => 
-        sub.name.toLowerCase().includes(query) || 
-        tool.module.name.toLowerCase().includes(query)
+        sub.label.toLowerCase().includes(query) || 
+        tool.module.label.toLowerCase().includes(query)
       )
     })).filter(tool => 
-      tool.module.name.toLowerCase().includes(query) || 
+      tool.module.label.toLowerCase().includes(query) || 
       tool.submodules.length > 0
     );
   };
@@ -219,14 +220,14 @@ const Home = () => {
             <When condition={showDropdown}>
               <div 
                 ref={dropdownRef}
-                className="absolute top-14 left-0 right-0 bg-white rounded-l-2xl shadow-2xl max-h-96 overflow-y-auto z-50 border border-gray-200 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-mhfd-dark-blue [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-medium-green"
+                className="absolute top-14 left-0 right-0 bg-white rounded-2xl shadow-2xl max-h-96 overflow-y-auto z-50 border border-gray-200 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-mhfd-dark-blue [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-medium-green"
               >
                 {getFilteredTools().length > 0 ? (
                   getFilteredTools().map((tool) => (
                     <div key={tool.id} className="border-b border-gray-100 last:border-b-0">
                       <div 
                         className="px-4 py-3 hover:bg-gray-50 cursor-pointer font-semibold text-mhfd-dark-blue"
-                        onClick={() => handleSelectItem(tool.module.name)}
+                        onClick={() => handleSelectItem(tool.module.label)}
                       >
                         {tool.module.name}
                       </div>
@@ -236,7 +237,7 @@ const Home = () => {
                             <div
                               key={idx}
                               className="px-8 py-2 hover:bg-gray-100 cursor-pointer text-gray-700 border-t border-gray-200"
-                              onClick={() => handleSelectItem(submodule.name)}
+                              onClick={() => handleSelectItem(submodule.label)}
                             >
                               {submodule.name}
                             </div>
