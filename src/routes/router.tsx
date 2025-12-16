@@ -13,7 +13,8 @@ const Versions = lazy(() => import('@/pages/Culvert/Versions'));
 const Documentation = lazy(() => import('@/pages/Culvert/Documentation'));
 const LOMCLayout = lazy(() => import('@/layouts/LOMCLayout'));
 const LOMC = lazy(() => import('@/pages/LOMC'));
-const LOMCSettings = lazy(() => import('@/pages/LOMC/Settings'));
+const LOMCSettings = lazy(() => import('@/pages/LOMC/Settings/Settings'));
+const LOMCMap = lazy(() => import('@/pages/LOMC/Map'));
 const Rational = lazy(() => import('@/pages/Rational'));
 const About = lazy(() => import('@/pages/About'));
 
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
             </Route>
             <Route path={PATHS.LOMC.HOME} element={<LOMCLayout />}>
                 <Route index element={<LOMC />} />
+                <Route path={PATHS.LOMC.MAP} element={<LOMCMap />} />
                 <Route path={PATHS.LOMC.SETTINGS} element={<LOMCSettings />} />
             </Route>
             <Route path={PATHS.RATIONAL.HOME} element={<Rational />} />

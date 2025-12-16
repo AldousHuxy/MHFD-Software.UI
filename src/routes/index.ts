@@ -19,7 +19,8 @@ export default {
     },
     LOMC: {
         HOME: LOMC,
-        SETTINGS: `${LOMC}/settings`,
+        MAP: `${LOMC}/map`,
+        SETTINGS: `${LOMC}/settings`
     },
     ABOUT: '/about',
     UNKNOWN: '*',

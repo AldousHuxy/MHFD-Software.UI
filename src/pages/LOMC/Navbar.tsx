@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
 import { useAgent } from '@/context/AgentContext';
+import { FaRegMap } from "react-icons/fa";
 import PATHS from '@/routes';
 
 type NavbarProps = {
@@ -95,6 +96,14 @@ export const Navbar = ({ open, setOpen }: NavbarProps) => {
               </div>
             )}
           </div>
+
+          <button
+            onClick={() => navigate(PATHS.LOMC.MAP)}
+            className="cursor-pointer p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+            aria-label="Go to Map"
+          >
+            <FaRegMap className="w-6 h-6 text-slate-200" />
+          </button>
 
           <button
             onClick={() => navigate(isSettingsPage ? PATHS.LOMC.HOME : PATHS.LOMC.SETTINGS)}
