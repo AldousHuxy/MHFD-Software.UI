@@ -40,7 +40,7 @@ const Home = () => {
       id: 2,
       module: { name: <>Design Tools [USDCM] Vol.1 & 2</>, label: 'Design Tools [USDCM] Vol.1 & 2', route: '/design-tools-vol1-2' },
       submodules: [
-        { name: <>Peak Runoff Prediction by the Rational Method</>, label: 'Rational', route: '/rational' },
+        { name: <>Peak Runoff Prediction by the Rational Method <sup className="text-medium-green">v4</sup></>, label: 'Rational', route: ROUTES.RATIONAL.HOME },
         { name: <>Street Capacity and Inlet Sizing</>, label: 'Inlet', route: '/inlet' },
         { name: <>Detention Design <sup className="text-medium-green">v5</sup></>, label: 'Detention', route: '/detention' },
         { name: <>Culvert Hydraulics <sup className="text-medium-green">v3</sup></>, label: 'Culvert', route: ROUTES.CULVERT.HOME }
@@ -67,7 +67,7 @@ const Home = () => {
       id: 5,
       module: { name: <>Floodplain Management Tools</>, label: 'Floodplain Management Tools', route: '/floodplain-management' },
       submodules: [
-        { name: <>Letter of Map Change Analysis</>, label: 'LOMC Chatbot', route: ROUTES.LOMC.HOME }
+        { name: <>Letter of Map Change Analysis</>, label: 'Letter of Map Change Analysis', route: ROUTES.LOMC.HOME }
       ]
     },
   ]
@@ -128,6 +128,17 @@ const Home = () => {
     setSearchQuery(item);
     setShowDropdown(false);
     searchRef.current?.blur();
+    
+    // Navigate to the selected route
+    const selectedTool = toolsDropdown.find(tool => 
+      tool.module.label === item || 
+      tool.submodules.some(sub => sub.label === item)
+    );
+    if (selectedTool) {
+      const submodule = selectedTool.submodules.find(sub => sub.label === item);
+      const route = submodule ? submodule.route : selectedTool.module.route;
+      navigate(route);
+    }
   };
 
   const handleClearSearch = () => {

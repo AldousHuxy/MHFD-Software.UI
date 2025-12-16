@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
 import { When } from '@/hocs/When';
 import type { Culvert, CulvertType } from '@/types/designInfo';
-import { MdOutlinePrint } from "react-icons/md";
+import { AiOutlineDownload } from "react-icons/ai";
 import { FileUtils } from '@/utils/file';
 import { NewCulvertModal } from './NewCulvertModal';
 
@@ -71,7 +71,7 @@ export const Toolbox = () => {
     return (
         <When condition={!!(designInformation?.culverts && designInformation.culverts.length > 0)}>
             <div 
-                className="fixed bottom-4 sm:bottom-16 right-3 sm:right-6 z-50"
+                className="fixed bottom-6 sm:bottom-20 right-3 sm:right-6 z-50"
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave={() => setIsOpen(false)}
             >
@@ -129,14 +129,17 @@ export const Toolbox = () => {
                         <PiToolboxDuotone size={32} className="hidden sm:block" />
                     </button>
                     
-                    {/* Print Button */}
+                    {/* Download Button */}
                     <button
                         onClick={dowloadDesignInfo}
-                        className="cursor-pointer absolute top-0 right-0 w-5 h-5 sm:w-6 sm:h-6 bg-mhfd-dark-blue text-white rounded-full shadow-md flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-200"
-                        aria-label="Print"
+                        className="cursor-pointer absolute top-0 right-0 w-5 h-5 sm:w-6 sm:h-6 bg-mhfd-dark-blue text-white rounded-full shadow-md flex items-center justify-center hover:scale-110 hover:shadow-lg transition-all duration-200 group"
+                        aria-label="Download"
                     >
-                        <MdOutlinePrint size={12} className="sm:hidden" />
-                        <MdOutlinePrint size={14} className="hidden sm:block" />
+                        <AiOutlineDownload size={12} className="sm:hidden" />
+                        <AiOutlineDownload size={14} className="hidden sm:block" />
+                        <span className="absolute bottom-full right-0 mb-2 px-2 py-1 bg-white border border-mhfd-dark-blue text-mhfd-dark-blue text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                            Download
+                        </span>
                     </button>
                 </div>
             </div>

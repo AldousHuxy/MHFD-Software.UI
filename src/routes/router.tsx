@@ -14,6 +14,7 @@ const Documentation = lazy(() => import('@/pages/Culvert/Documentation'));
 const LOMCLayout = lazy(() => import('@/layouts/LOMCLayout'));
 const LOMC = lazy(() => import('@/pages/LOMC'));
 const LOMCSettings = lazy(() => import('@/pages/LOMC/Settings'));
+const Rational = lazy(() => import('@/pages/Rational'));
 const About = lazy(() => import('@/pages/About'));
 
 export const router = createBrowserRouter(
@@ -33,6 +34,7 @@ export const router = createBrowserRouter(
                 <Route index element={<LOMC />} />
                 <Route path={PATHS.LOMC.SETTINGS} element={<LOMCSettings />} />
             </Route>
+            <Route path={PATHS.RATIONAL.HOME} element={<Rational />} />
             <Route path={PATHS.ABOUT} element={<About />} />
             <Route path={PATHS.UNKNOWN} element={<Navigate to={PATHS.HOME} replace />} />
         </Route>

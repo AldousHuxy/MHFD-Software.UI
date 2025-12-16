@@ -12,7 +12,7 @@ const LOMCLayout = () => {
   return (
     <ThemeProvider>
         <AgentProvider>
-            <div className={`h-[calc(100vh-153px)] flex flex-col overflow-hidden transition-colors duration-300 ${isDarkTheme ? 'bg-gray-900' : 'bg-slate-50'}`}>
+            <div className={`h-[calc(100vh-152px)] flex flex-col overflow-hidden transition-colors duration-300 ${isDarkTheme ? 'bg-gray-900' : 'bg-slate-50'}`}>
                 <Navbar open={isSidebarOpen} setOpen={setIsSidebarOpen} />
                 <div className="flex-1 overflow-hidden relative">
                     <div className={`h-full transition-all duration-300 ${isSidebarOpen ? 'lg:mr-80' : 'mr-0'}`}>

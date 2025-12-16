@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
 import { useAgent } from '@/context/AgentContext';
@@ -16,15 +16,32 @@ export const Navbar = ({ open, setOpen }: NavbarProps) => {
   const { agents, selectedAgent, changeSelectedAgent } = useAgent();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <nav className={`flex items-center justify-between gap-4 p-4 transition-colors duration-300 ${isDarkTheme ? 'bg-slate-700' : 'bg-slate-700'}`}>
         <div className="flex items-center gap-4">
-          <h1 className="font-bold text-lg text-white">LOMC Chatbot</h1>
+          <h1 className="font-bold text-lg text-white">Letter of Map Change Analysis</h1>
         </div>
         <div className="flex items-center gap-3">
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="cursor-pointer flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
@@ -48,6 +65,9 @@ export const Navbar = ({ open, setOpen }: NavbarProps) => {
                       if (!agent.disabled) {
                         changeSelectedAgent(agent);
                         setIsDropdownOpen(false);
+                        if (isSettingsPage) {
+                          navigate(PATHS.LOMC.HOME);
+                        }
                       }
                     }}
                     disabled={agent.disabled}

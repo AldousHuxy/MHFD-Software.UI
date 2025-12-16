@@ -6,9 +6,8 @@ import { useTheme } from '@/context/ThemeContext';
 import type { MutableRefObject } from 'react';
 
 const pills = [
-  { id: 0, label: 'Test', text: 'Who am I?', color: 'grey' },
-  { id: 2, label: 'Summarize', text: 'Summarize the entire proposal and check for key points, included parties, and any notable details', color: 'grey' },
   { id: 1, label: 'Tie-Ins', text: 'Analyze the upstream and downstream tie-ins with existing infrastructure', color: 'grey' },
+  { id: 2, label: 'Summarize', text: 'Summarize the entire proposal and check for key points, included parties, and any notable details', color: 'grey' },
   { id: 3, label: 'Requirements', text: 'Check for visibility of license number, signature number, seal, and other regulatory markings', color: 'grey' },
   { id: 4, label: 'Issues', text: 'Identify any noticeable issues or concerns within the proposal', color: 'grey' },
   { id: 5, label: 'Satisfaction', text: 'Determine the current satisfaction rating for this proposal based on recent reviews', color: 'grey' },

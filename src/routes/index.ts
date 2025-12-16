@@ -1,8 +1,13 @@
+const RATIONAL: string = '/rational';
 const CULVERT: string = '/culvert';
+const LOMC: string = '/lomc';
 
 export default {
     APP: '/',
     HOME: '/',
+    RATIONAL: {
+        HOME: RATIONAL,
+    },
     CULVERT: {
         HOME: CULVERT,
         CONDUIT_FLOW: `${CULVERT}/conduit-flow`,
@@ -13,8 +18,8 @@ export default {
         DOCUMENTATION: `${CULVERT}/docs`,
     },
     LOMC: {
-        HOME: '/lomc',
-        SETTINGS: '/lomc/settings',
+        HOME: LOMC,
+        SETTINGS: `${LOMC}/settings`,
     },
     ABOUT: '/about',
     UNKNOWN: '*',

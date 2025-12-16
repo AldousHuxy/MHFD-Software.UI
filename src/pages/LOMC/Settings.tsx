@@ -5,7 +5,10 @@ const Settings = () => {
   const { isDarkTheme } = useTheme();
 
     return (
-    <main className="h-[calc(100vh-8rem)] sm:h-[calc(100vh-9rem)] md:h-[calc(100vh-10rem)] lg:h-[calc(100vh-12rem)] xl:h-[calc(100vh-14rem)] flex flex-col p-2 sm:p-3 md:p-4 lg:p-4 xl:p-5">
+    <main className={`h-[calc(100vh-8rem)] sm:h-[calc(100vh-9rem)] md:h-[calc(100vh-10rem)] lg:h-[calc(100vh-12rem)] xl:h-[calc(100vh-14rem)] flex flex-col p-2 sm:p-3 md:p-4 lg:p-4 xl:p-5
+      ${isDarkTheme
+        ? 'bg-gray-900 text-white'
+        : 'bg-white text-gray-900'}`}>
       <div className={`rounded-xl shadow-lg border p-3 sm:p-4 md:p-5 lg:p-5 xl:p-6 transition-colors ${
         isDarkTheme 
           ? 'bg-gray-800 border-gray-700' 
