@@ -191,7 +191,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      <div className="relative overflow-hidden w-full h-[88vh]">
+      <div className="relative overflow-hidden w-full h-[81.05vh] xl:h-[88.05vh]">
         <div className="absolute inset-0 flex items-center justify-center">
           <img src={carouselImages[currentImageIndex].src} alt={carouselImages[currentImageIndex].alt} className="w-full h-full object-cover opacity-65" />
           <div className="absolute top-3 left-[36%] flex flex-col">
