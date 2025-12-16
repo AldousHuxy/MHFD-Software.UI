@@ -3,6 +3,7 @@ import type { Pill } from '@/types/pill';
 import { useChatForm } from '../hooks/useChatForm';
 import { SuggestionPill } from './SuggestionPill';
 import { useTheme } from '@/context/ThemeContext';
+import type { MutableRefObject } from 'react';
 
 const pills = [
   { id: 0, label: 'Test', text: 'Who am I?', color: 'grey' },
@@ -21,9 +22,10 @@ const pills = [
 type ChatMessageProps = {
   onSendMessage: (message: Message) => Promise<void>;
   isPending?: boolean;
+  onResetRef?: MutableRefObject<(() => void) | null>;
 };
 
-export const ChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
+export const ChatForm = ({ onSendMessage, isPending, onResetRef }: ChatMessageProps) => {
   const {
     selectedAgent,
     selectedFile,
@@ -35,8 +37,13 @@ export const ChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
     handlePillClick,
     handleFileChange,
     handleAttachmentClick,
+    resetForm
   } = useChatForm({ onSendMessage, isPending });
   const { isDarkTheme } = useTheme();
+
+  if (onResetRef) {
+    onResetRef.current = resetForm;
+  }
 
   return (
     <div className={`rounded-2xl shadow-lg border transition-all ${
@@ -87,11 +94,12 @@ export const ChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
       <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-3 p-4">
           <input 
             type="text"
+            disabled={isPending}
             className={`flex-1 px-4 py-3 border-0 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mhfd-blue transition-all ${
               isDarkTheme 
                 ? 'bg-gray-700 text-gray-100 focus:bg-gray-600' 
                 : 'bg-gray-50 text-gray-800 focus:bg-white'
-            }`}
+            } ${isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
             placeholder={`Type your message to ${selectedAgent.shortName}...`}
             {...register('messages.0.content')}
           />

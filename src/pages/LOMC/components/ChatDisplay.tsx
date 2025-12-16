@@ -18,6 +18,8 @@ export const ChatDisplay = ({ messages, isPending }: ChatDisplayProps) => {
     }
   }, [messages, isPending]);
 
+  console.log(messages);
+
   return (
     <div 
       ref={scrollRef}

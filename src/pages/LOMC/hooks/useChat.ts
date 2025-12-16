@@ -3,10 +3,10 @@ import { useConversationMutation } from "@/api/useConverstationMutation";
 import { useMessages } from "@/stores/useMessages";
 import type { Message } from "@/types/conversation";
 
-export const useChat = () => {
+export const useChat = (onMessageSent?: () => void) => {
     const { msgs, addMessage } = useMessages();
     const { selectedAgent } = useAgent();
-    const { isPending, converse } = useConversationMutation();
+    const { isPending, converse } = useConversationMutation(onMessageSent);
 
     const handleSendMessage = async (message: Message) => {
         addMessage(message);

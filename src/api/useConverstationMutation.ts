@@ -4,14 +4,17 @@ import { server } from "./axios";
 import type { AxiosResponse } from "axios";
 import { useMessages } from "@/stores/useMessages";
 
-export const useConversationMutation = () => {
+export const useConversationMutation = (onSuccess?: () => void) => {
     const { addMessage } = useMessages();
     const {
         mutateAsync,
         isPending
     } = useMutation({
         mutationKey: ['converse'],
-        mutationFn: async (conversation: ConversationRequest) => (await server.post<ConversationRequest, AxiosResponse<ConversationResponse, Error>, unknown>('/openai/conversation', conversation)).data, 
+        mutationFn: async (conversation: ConversationRequest) => (await server.post<ConversationRequest, AxiosResponse<ConversationResponse, Error>, unknown>('/openai/conversation', conversation)).data,
+        onSuccess: () => {
+            if (onSuccess) onSuccess();
+        }
     });
 
     const converse = async (conversation: ConversationRequest) => {

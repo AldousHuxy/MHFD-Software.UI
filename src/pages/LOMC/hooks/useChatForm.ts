@@ -10,7 +10,11 @@ type ChatMessageProps = {
 };
 
 export const useChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
-  const { register, handleSubmit, setValue, reset } = useForm<ConversationRequest>();
+  const { register, handleSubmit, setValue, reset } = useForm<ConversationRequest>({
+    defaultValues: {
+      messages: [{ role: 'user', content: '' }]
+    }
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { selectedAgent } = useAgent();
@@ -33,15 +37,22 @@ export const useChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
   };
 
   const onSubmit: SubmitHandler<ConversationRequest> = async (data) => {
-    if (!data?.messages || data.messages.length === 0 || isPending) return;
-    const message = data.messages[0];
-    if (!message.content.trim()) return;
-    reset();
+    if (isPending) return;
+    
+    const message = data?.messages?.[0];
+    if (!message?.content?.trim()) return;
+    
+    const messageContent = message.content;
+    
     try {
-      await onSendMessage({ role: 'user', content: message.content });
+      await onSendMessage({ role: 'user', content: messageContent });
     } catch (error) {
       console.error('Error in onSubmit:', error);
     }
+  };
+
+  const resetForm = () => {
+    reset({ messages: [{ role: 'user', content: '' }] });
   };
 
   const handlePillClick = (input: string) => setValue('messages.0.content', input, { shouldValidate: true, shouldDirty: true });
@@ -58,6 +69,7 @@ export const useChatForm = ({ onSendMessage, isPending }: ChatMessageProps) => {
     handleAttachmentClick,
     removeFile,
     onSubmit,
-    clearMessages
+    clearMessages,
+    resetForm
   };
 }
