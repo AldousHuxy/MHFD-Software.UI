@@ -59,7 +59,7 @@ const Home = () => {
       id: 4,
       module: { name: <>Planning & Construction Tools</>, label: 'Planning & Construction Tools', route: '/planning-construction' },
       submodules: [
-        { name: <>Bid Item Pricing</>, label: 'Bid Item Pricing', route: '/bid-item-pricing' },
+        { name: <>Bid Item Pricing</>, label: 'Bid Item Pricing', route: ROUTES.BID_ITEM.HOME },
         { name: <>Urban Drainage Master Plan Cost <sup className="text-medium-green">v3</sup></>, label: 'UD-MP Cost', route: '/ud-mp-cost' }
       ]
     },

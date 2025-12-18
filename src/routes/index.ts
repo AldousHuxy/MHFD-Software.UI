@@ -1,5 +1,6 @@
 const RATIONAL: string = '/rational';
 const CULVERT: string = '/culvert';
+const BID_ITEMS: string = '/bid-items';
 const LOMC: string = '/lomc';
 
 export default {
@@ -16,6 +17,10 @@ export default {
         PROFILE: `${CULVERT}/profile`,
         PREVIOUS_VERSIONS: `${CULVERT}/versions`,
         DOCUMENTATION: `${CULVERT}/docs`,
+    },
+    BID_ITEM: {
+        HOME: BID_ITEMS,
+        ESTIMATE: `${BID_ITEMS}/estimate`,
     },
     LOMC: {
         HOME: LOMC,

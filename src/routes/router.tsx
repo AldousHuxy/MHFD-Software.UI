@@ -11,6 +11,7 @@ const HWOutletProtection = lazy(() => import('@/pages/Culvert/HWOutletProtection
 const Profile = lazy(() => import('@/pages/Culvert/Profile'));
 const Versions = lazy(() => import('@/pages/Culvert/Versions'));
 const Documentation = lazy(() => import('@/pages/Culvert/Documentation'));
+const BidItem = lazy(() => import('@/pages/BidItem'));
 const LOMCLayout = lazy(() => import('@/layouts/LOMCLayout'));
 const LOMC = lazy(() => import('@/pages/LOMC'));
 const LOMCSettings = lazy(() => import('@/pages/LOMC/Settings/Settings'));
@@ -31,6 +32,7 @@ export const router = createBrowserRouter(
                 <Route path={PATHS.CULVERT.PREVIOUS_VERSIONS} element={<Versions />} />
                 <Route path={PATHS.CULVERT.DOCUMENTATION} element={<Documentation />} />
             </Route>
+            <Route path={PATHS.BID_ITEM.HOME} element={<BidItem />} />
             <Route path={PATHS.LOMC.HOME} element={<LOMCLayout />}>
                 <Route index element={<LOMC />} />
                 <Route path={PATHS.LOMC.MAP} element={<LOMCMap />} />

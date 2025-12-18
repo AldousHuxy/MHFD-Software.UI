@@ -4,9 +4,9 @@ import { Header } from './components/Header';
 
 const App = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
       <Header />
-      <main className="flex-1 h-full">
+      <main className="flex-1 overflow-hidden">
         <Outlet />
       </main>
       <Footer />
