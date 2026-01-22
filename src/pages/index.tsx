@@ -67,7 +67,8 @@ const Home = () => {
       id: 5,
       module: { name: <>Floodplain Management Tools</>, label: 'Floodplain Management Tools', route: '/floodplain-management' },
       submodules: [
-        { name: <>Letter of Map Change Analysis</>, label: 'Letter of Map Change Analysis', route: ROUTES.LOMC.HOME }
+        { name: <>Letter of Map Change Analysis</>, label: 'Letter of Map Change Analysis', route: ROUTES.LOMC.HOME },
+        { name: <>Case Tracking Report</>, label: 'Case Tracking Report', route: ROUTES.CASE_TRACKING.HOME }
       ]
     },
   ]

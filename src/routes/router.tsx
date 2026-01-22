@@ -16,6 +16,7 @@ const LOMCLayout = lazy(() => import('@/layouts/LOMCLayout'));
 const LOMC = lazy(() => import('@/pages/LOMC'));
 const LOMCSettings = lazy(() => import('@/pages/LOMC/Settings/Settings'));
 const LOMCMap = lazy(() => import('@/pages/LOMC/Map'));
+const CaseTracking = lazy(() => import('@/pages/CaseTracking'));
 const Rational = lazy(() => import('@/pages/Rational'));
 const About = lazy(() => import('@/pages/About'));
 
@@ -38,6 +39,7 @@ export const router = createBrowserRouter(
                 <Route path={PATHS.LOMC.MAP} element={<LOMCMap />} />
                 <Route path={PATHS.LOMC.SETTINGS} element={<LOMCSettings />} />
             </Route>
+            <Route path={PATHS.CASE_TRACKING.HOME} element={<CaseTracking />} />
             <Route path={PATHS.RATIONAL.HOME} element={<Rational />} />
             <Route path={PATHS.ABOUT} element={<About />} />
             <Route path={PATHS.UNKNOWN} element={<Navigate to={PATHS.HOME} replace />} />

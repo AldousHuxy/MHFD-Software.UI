@@ -33,5 +33,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "../../Demos/MHFD-Software.API/src/utils/parseReport.ts"]
 }

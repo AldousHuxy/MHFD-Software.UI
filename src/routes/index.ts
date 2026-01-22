@@ -2,6 +2,7 @@ const RATIONAL: string = '/rational';
 const CULVERT: string = '/culvert';
 const BID_ITEMS: string = '/bid-items';
 const LOMC: string = '/lomc';
+const CASE_TRACKING: string = '/case-tracking';
 
 export default {
     APP: '/',
@@ -27,6 +28,9 @@ export default {
         MAP: `${LOMC}/map`,
         SETTINGS: `${LOMC}/settings`
     },
+    CASE_TRACKING: {
+        HOME: CASE_TRACKING,
+    },
     ABOUT: '/about',
     UNKNOWN: '*',
-};
+} as const;
