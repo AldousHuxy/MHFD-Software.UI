@@ -61,7 +61,7 @@ const CaseTracking = () => {
         <div className="max-w-8xl mx-auto sm:p-4 space-y-3 sm:space-y-4">
             <div className="text-center">
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-mhfd-dark-blue mb-1">Case Tracking Report</h1>
-                <p className="text-gray-600 text-xs sm:text-sm">Monitor and track CLOMR and LOMR project proposals</p>
+                <p className="text-gray-600 text-xs sm:text-sm">Monitor and track LOMC reports</p>
             </div>
 
             <When condition={reports.length > 0}>
