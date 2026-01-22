@@ -3,7 +3,7 @@ import { server } from './axios';
 import type { AxiosResponse } from 'axios';
 import type { Report } from '@/types/report';
 
-export const useGetCaseByIdQuery = (filename: string) => {
+export const useGetCaseByIdQuery = (filename: string = 'LOMC-CaseTrackingReport_10.6.2025') => {
     const {
         data: reports,
         isLoading,
