@@ -1,4 +1,4 @@
-import { password, username } from "@/env";
+import { PASSWORD, USERNAME } from "@/env";
 
 const PORTAL_URL = {
     AGOL: 'https://www.arcgis.com',
@@ -15,8 +15,8 @@ type Token = {
 
 export const generateToken = async (portal: Environment): Promise<string> => {
     const searchParams = new URLSearchParams({
-        username: username,
-        password: password,
+        username: USERNAME,
+        password: PASSWORD,
         client: 'requestip',
         expiration: '1440',
         f: 'json'
