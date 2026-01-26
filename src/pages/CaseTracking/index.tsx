@@ -114,7 +114,7 @@ const CaseTracking = () => {
                         </div>
                     </div>
                     
-                    <div className="overflow-auto max-h-[400px] lg:max-h-[700px] xl:max-h-[800px] 2xl:max-h-[850px]">
+                    <div className="overflow-auto max-h-[calc(100vh-420px)]">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-mhfd-dark-blue sticky top-0 z-10">
                                 <tr>
