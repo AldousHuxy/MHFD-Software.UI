@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { server } from './axios';
 import type { AxiosResponse } from 'axios';
-import type { Case } from '@/types/report';
 
 export const useGetAllCasesQuery = () => {
     const {
@@ -11,8 +10,8 @@ export const useGetAllCasesQuery = () => {
         error,
     } = useQuery({
         queryKey: ['all-cases'],
-        queryFn: async () => (await server.get<never, AxiosResponse<Case[], Error>, unknown>('/cases/all')).data,
-        initialData: [] as Case[],
+        queryFn: async () => (await server.get<never, AxiosResponse<string[], Error>, unknown>('/cases/all')).data,
+        initialData: [] as string[],
     });
 
     return {
